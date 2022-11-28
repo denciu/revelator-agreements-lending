@@ -1,0 +1,50 @@
+networks:
+
+  # DEV
+  - name: bnbtest
+    LendingContract: "0x76bbBCc89d8764040C3a02e503dFc3A7C7470dD8"
+    TrackedToken: "0x5861f16FABfc0e6a2Eff34c265997c5cd4CaFA3B"
+    AgreementFactoryV10: "0x4278D82Ca2605C2F41248FF862217f05105384d7"
+    agreementImplementationV10: "0x816d2d761ff345ab42e522ea4dfb2337e55964e1"
+    startBlock: 22083000
+
+  - name: sepolia
+    LendingContract: "0xFec88a4640AF9847f46C86dD441dB5FA0E525e77"
+    TrackedToken: "0x5861f16FABfc0e6a2Eff34c265997c5cd4CaFA3B"
+    AgreementFactoryV10: "0xC04775664CF60BffF90ba9822Ac41A2399F731Eb"
+    agreementImplementationV10: "0x139119F096F1761A761164E53BC51E95D6bB4548"
+    startBlock: 1749102
+
+
+  # STAGE 
+  - name: goerli
+    LendingContract: "0xD070226aA57D712A1343baAdcc7bBeE471B549b4"
+    TrackedToken: "0x07865c6e87b9f70255377e024ace6630c1eaa37f"
+    AgreementFactoryV10: "0x8eE50b4Ccf3397893Df58E70061B49445756014F"
+    agreementImplementationV10: "0xE3dA604814cDF2b782F3a1A56A535afeA3B22C95"
+    startBlock: 7184125
+
+  - name: mumbai
+    LendingContract: "0xc610d5695dA950740D14E93D4c9af9C712a746Ae"
+    TrackedToken: "0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747"
+    AgreementFactoryV10: "0xb96C8221f20A0F4aE1906bC6B73ff1131B2459BE"
+    agreementImplementationV10: "0x0880037908158964b2C2d92Db1224E97aCdc360a"
+    startBlock: 27141662
+
+
+  # PROD
+  - name: polygon
+    LendingContract: "0x4f994Da24EFEEdbb8FcF03F253Bdd7eAF9fC9870"
+    TrackedToken: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+    AgreementFactoryV10: "0x927A0dBe6eD7465BEd21CF4f8d4e2fD0E275714A"
+    agreementImplementationV10: "0x244EA8Bdf13cB814Fe0eE8741F2d1F8a0563eC62"
+    startBlock: 33053062
+
+  - name: bsc
+    LendingContract: "0x48bEd7a25bcdAE334C79AB43bF914d08f9c42bbc"
+    TrackedToken: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
+    AgreementFactoryV10: "0xFFB6E52E471bF263A31D28850f190b6d12E00042"
+    agreementImplementationV10: "0x2cEbd2d1aE0f6D4bB6b10AAdaa2b184e4fEc58ea"
+    startBlock: 21297684
+
+  - name: mainnet

@@ -1,0 +1,36 @@
+{
+  "name": "@original-works/subgraph-agreements-lending",
+  "license": "UNLICENSED",
+  "version": "0.0.1",
+  "scripts": {
+    "codegen": "graph codegen",
+    "load-config:bnbtest": "NETWORK=bnbtest ts-node scripts/set-chain.ts",
+    "load-config:sepolia": "NETWORK=sepolia ts-node scripts/set-chain.ts",
+    "load-config:mumbai": "NETWORK=mumbai ts-node scripts/set-chain.ts",
+    "load-config:goerli": "NETWORK=goerli ts-node scripts/set-chain.ts",
+    "load-config:bsc": "NETWORK=bsc ts-node scripts/set-chain.ts",
+    "load-config:polygon": "NETWORK=polygon ts-node scripts/set-chain.ts",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ cezary-stroczynski/Ropstendev",
+    "create-local:ropsten": "graph create --node http://localhost:8020/ --ipfs http://localhost:5001 testgraph/ropsten",
+    "create-local:kovan": "graph create --node http://localhost:8020/ --ipfs http://localhost:5001 testgraph/kovan",
+    "deploy-local:ropsten": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 testgraph/ropsten -l v0.0.1",
+    "deploy-local:kovan": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 testgraph/kovan -l v0.0.1",
+    "remove-local": "graph remove --node http://localhost:8020/ cezary-stroczynski/Ropstendev",
+    "create-for-test:ropsten": "graph create --node http://graph-node:8020/ testgraph/ropsten",
+    "deploy-for-test:ropsten": "graph deploy --node http://graph-node:8020/ --ipfs http://ipfs:5001 testgraph/ropsten -l v0.0.1",
+    "create-for-test:goerli": "graph create --node http://graph-node:8020/ testgraph/goerli",
+    "deploy-for-test:goerli": "graph deploy --node http://graph-node:8020/ --ipfs http://ipfs:5001 testgraph/goerli -l v0.0.1",
+    "create-for-test:kovan": "graph create --node http://graph-node:8020/ testgraph/kovan",
+    "deploy-for-test:kovan": "graph deploy --node http://graph-node:8020/ --ipfs http://ipfs:5001 testgraph/kovan -l v0.0.1"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.22.1",
+    "@graphprotocol/graph-ts": "0.22.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^16.11.12",
+    "js-yaml": "^4.1.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}

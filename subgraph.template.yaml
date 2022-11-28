@@ -1,0 +1,126 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+features:
+  - ipfsOnEthereumContracts
+dataSources:
+  - kind: ethereum/contract
+    name: LendingContract
+    network: undefined
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: LendingContract
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - AddedToWhitelist
+        - LoanCreated
+        - LoanIncreased
+        - RemovedFromWhitelist
+        - Repayment
+      abis:
+        - name: LendingContract
+          file: ./abis/LendingContract.json
+      eventHandlers:
+        - event: AddedToWhitelist(indexed address)
+          handler: handleAddedToWhitelist
+        - event: LoanCreated(indexed uint256,address[])
+          handler: handleLoanCreated
+        - event: LoanIncreased(indexed uint256,uint256)
+          handler: handleLoanIncreased
+        - event: RemovedFromWhitelist(indexed address)
+          handler: handleRemovedFromWhitelist
+        - event: Repayment(indexed uint256,uint256)
+          handler: handleRepayment
+      file: ./src/mappings/LendingContract.ts
+
+  - kind: ethereum/contract
+    name: TrackedToken
+    network: undefined
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: ERC20
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - TrackedTokenTransfer
+        - TrackedTokenApproval
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTrackedTokenTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleTrackedTokenApproval
+      file: ./src/mappings/TrackedToken.ts
+
+  - kind: ethereum/contract
+    name: AgreementFactory
+    network: undefined
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: AgreementFactory
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - AgreementCreated
+        - AgreementImplementationChanged
+        - AgreementFactoryOwnerChanged
+      abis:
+        - name: AgreementFactory
+          file: ./abis/AgreementFactory.json
+      eventHandlers:
+        - event: AgreementCreated(indexed address,indexed address)
+          handler: handleAgreementCreated
+        - event: AgreementImplementationChanged(indexed address)
+          handler: handleAgreementImplementationChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/mappings/agreementFactory.ts
+
+templates:
+  - kind: ethereum/contract
+    name: Agreement
+    network: undefined
+    source:
+      abi: Agreement
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - AgreementTransfer
+        - AgreementApproval
+        - AdminAdded
+        - AdminRemoved
+        - UserIncomeCollected
+        - DataHashChanged
+        - PushNotification
+        - Counter
+      abis:
+        - name: Agreement
+          file: ./abis/Agreement.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleAgreementTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleAgreementApproval
+        - event: AdminAdded(address)
+          handler: handleAdminAdded
+        - event: AdminRemoved(address)
+          handler: handleAdminRemoved
+        - event: UserIncomeCollected(address,uint256)
+          handler: handleUserIncomeCollected
+        - event: DataHashChanged(string)
+          handler: handleDataHashChanged
+      file: ./src/mappings/agreement.ts

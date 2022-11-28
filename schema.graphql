@@ -1,0 +1,260 @@
+type Counter @entity {
+  id: ID!
+  value: Int! 
+}
+
+type PushNotification @entity {
+  id: ID!
+  network: String!
+  signature: String!
+  contract: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  seqNumber: Int!
+  transactionData: Bytes
+}
+
+type Loan @entity {
+  id: ID!
+  network: String!
+  lender: Bytes!
+  borrower: Bytes!
+  agreement: Agreement!
+  repayments: [Repayment!]!
+  loanIncreasings: [LoanIncreased!]!
+}
+
+type LoanCreated @entity {
+  id: ID!
+  lender: Bytes!
+  borrower: Bytes!
+  network: String!
+  contract: Bytes!
+  agreement: Agreement!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type Repayment @entity {
+  id: ID!
+  from: Bytes!
+  network: String!
+  loanId: BigInt!
+  amount: BigInt!
+  agreement: Agreement!
+  contract: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  lender: Bytes!
+  borrower: Bytes!
+}
+
+type LoanIncreased @entity {
+  id: ID!
+  network: String!
+  loanId: BigInt!
+  amount: BigInt!
+}
+
+type Whitelist @entity {
+  id: ID!
+  network: String!
+  members: [Bytes!]!
+}
+
+type TrackedTokenTransfer @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type TrackedTokenApproval @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type AgreementCreated @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  agreementAddress: Bytes!
+  fromVersion: String!
+  agreementImplementation: Bytes
+}
+
+type AgreementImplementationChanged @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  agreementImplementation: Bytes!
+}
+
+type AgreementFactoryOwnerChanged @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  owner: Bytes!
+}
+
+
+type Agreement @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  address: Bytes!
+  fromVersion: String!
+  dataHash: String!
+  contractData: String!
+  transfers: [AgreementTransfer!]!
+  totalSupply: BigInt!
+  holders: [AgreementHolder!]!
+  timestamp: BigInt!
+  creationTxHash: Bytes!
+  implementationAddress: Bytes
+}
+
+type AgreementHolder @entity {
+  id: ID!
+  network: String!
+  agreement: Agreement!
+  agreementAddress: Bytes!
+  holderAddress: Bytes!
+  balance: BigInt!
+  isAdmin: Boolean!
+  transfersToOwnedAgreements: [TokenTransferToAgreement!]!
+}
+
+type AgreementTransfer @entity {
+  id: ID!
+  agreement: Agreement!
+  network: String!
+  contract: Bytes!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type AgreementApproval @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type AdminAdded @entity {
+  id: ID!
+  agreement: Agreement!
+  network: String!
+  contract: Bytes!
+  account: Bytes!
+  from: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type AdminRemoved @entity {
+  id: ID!
+  agreement: Agreement!
+  network: String!
+  contract: Bytes!
+  account: Bytes!
+  from: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+}
+
+type UserIncomeCollected @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  agreement: Agreement!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  account: Bytes!
+  value: BigInt!
+  isRoyaltyPayout: Boolean!
+  originalPayoutTxHash: Bytes!
+}
+
+type DataHashChanged @entity {
+  id: ID!
+  network: String!
+  contract: Bytes!
+  timestamp: BigInt!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+  logIndex: BigInt!
+  dataHash: String!
+}
+
+type TokenTransferToAgreement @entity {
+  id: ID!
+  agreement: Agreement!
+  from: Bytes!
+  to: Bytes!
+  transfer: TrackedTokenTransfer!
+  isRoyaltyPayout: Boolean!
+}
